@@ -1,0 +1,271 @@
+public class ComputerBuilder {
+    
+    private String UserName; //the user's name
+    private String brand; //the brand that the user has chosen
+    private String tower; //the tower type that the user has chosen
+    private String cpu; //the cpu brand that the user has chosen
+    private double cpuSpeed; //the cpu speed that the user has chosen
+    private double hardDriveCap; //the hard drive capacity that the user has chosen
+    private String monitorBrand; //the monitor brand that the user has chosen
+    private double monitorSize; //the monitor size that the user has chosen
+    private double displaySize;
+    private double total = 0.0;
+    
+    public ComputerBuilder(String name, String brand, String tower, String cpu, String cpuSpeed, String hardDriveCap, String monitorBrand, String monitorSize){
+        this.UserName = name;
+        this.brand = brand;
+        this.tower = tower;
+        this.cpu = cpu;
+        this.cpuSpeed = Double.parseDouble(cpuSpeed);
+        this.hardDriveCap = Double.parseDouble(hardDriveCap);
+        this.monitorBrand = monitorBrand;
+        this.monitorSize = Double.parseDouble(monitorSize);
+    }
+    
+    public ComputerBuilder(String name, String brand, String cpu, String cpuSpeed, String hardDriveCap, String displaySize){
+        this.UserName = name;
+        this.brand = brand;
+        this.cpu = cpu;
+        this.cpuSpeed = Double.parseDouble(cpuSpeed);
+        this.hardDriveCap = Double.parseDouble(hardDriveCap);
+        this.displaySize = Double.parseDouble(displaySize);
+    }
+    
+    public double brandPrice(){
+        if (this.brand.equalsIgnoreCase("Dell")){
+            this.total += 300;
+            return 300;
+        }
+        else if (this.brand.equalsIgnoreCase("HP")){
+            this.total += 280;
+            return 280;
+        }
+        else if (this.brand.equalsIgnoreCase("Lenovo")){
+            this.total += 260;
+            return 260;
+        }
+        else{
+            this.total += 250; // default brand base
+            return 250;
+        }
+        
+    }
+    
+    public double towerPrice(){
+        if (this.tower.equalsIgnoreCase("Full tower")){
+            this.total += 100;
+            return 100;
+        }
+        else if (this.tower.equalsIgnoreCase("Mini tower")){
+            this.total += 70;
+            return 70;
+        }
+        else{
+            this.total += 0;
+            return 0;
+        }
+        
+    }
+    
+    public double cpuPrice(){
+        if (this.cpu.equalsIgnoreCase("AMD")){
+            this.total += 150;
+            return 150;
+        }
+        else if (this.cpu.equalsIgnoreCase("Intel")){
+            this.total += 200;
+            return 200;
+        }
+        else{
+            this.total += 100;// unknown/other
+            return 100;
+        } 
+        
+    }
+    
+    public double cpuSpeedPrice(){
+        if (this.cpuSpeed <= 2.0) {
+            this.total += 40;    // very low power CPU speed
+            return 40;
+        } 
+        else if (this.cpuSpeed <= 2.5) {
+            this.total += 80;    // entry tier
+            return 80;
+        } 
+        else if (this.cpuSpeed <= 3.0) {
+            this.total += 120;   // mainstream
+            return 120;
+        } 
+        else if (this.cpuSpeed <= 3.5) {
+            this.total += 160;   // mid-performance
+            return 160;
+        } 
+        else if (this.cpuSpeed <= 4.0) {
+            this.total += 200;   // high-performance
+            return 200;
+        } 
+        else {
+            this.total += 250;   // elite
+            return 250;
+        }
+        
+    }
+    
+    public double hardDriveCapPrice(){
+        if (this.hardDriveCap <= 500) {
+            this.total += 50;   
+            return 50;
+        } 
+        else if (this.hardDriveCap <= 1000) {
+            this.total += 100;
+            return 100;
+        } 
+        else if (this.hardDriveCap <= 2000) {
+            this.total += 150;  
+            return 150;
+        } 
+        else {
+            this.total += 200;
+            return 250;
+        }
+        
+    }
+    
+    public double monitorBrandPrice(){
+        if (this.monitorBrand.equalsIgnoreCase("Samsung")) {
+            this.total += 70;   
+            return 70;
+        } 
+        else if (this.monitorBrand.equalsIgnoreCase("LG")) {
+            this.total += 50;   
+            return 50;
+        }  
+        else {
+            this.total += 0;
+            return 0;
+        }
+        
+    }
+    
+    public double monitorSizePrice(){
+        if (this.monitorSize <= 24) {
+            this.total += 100;   
+            return 100;
+        } 
+        else if (this.monitorSize <= 27) {
+            this.total += 120;   
+            return 120;
+        } 
+        else if (this.monitorSize <= 32) {
+            this.total += 150;   
+            return 150;
+        }
+        else if (this.monitorSize > 32) {
+            this.total += 200;   
+            return 200;
+        }  
+        else {
+            this.total += 0;
+            return 0;
+        }
+        
+    }
+    
+    public double displaySizePrice(){
+        if (this.monitorSize <= 13) {
+            this.total += 70;   
+            return 70;
+        } 
+        else if (this.monitorSize <= 15) {
+            this.total += 120;   
+            return 120;
+        } 
+        else if (this.monitorSize <= 17) {
+            this.total += 150;   
+            return 150;
+        }
+        else if (this.monitorSize > 17) {
+            this.total += 170;   
+            return 170;
+        }  
+        else {
+            this.total += 0;
+            return 0;
+        }
+        
+    }
+    
+    public double totalPrice(){
+        return this.total;
+    }
+    
+    public void printReceipt(String choice){
+        // Reset total for fresh calculation
+        this.total = 0.0;
+    
+        // Indented format strings
+        final String IND = "    ";
+        final String HEADING_FMT_STR = IND + "%-25s%15s%n";
+        final String DATA_FMT_STR    = IND + "%-25s%15.2f%n";
+        final String DIVIDER = IND + "------------------------------------------------------------";
+    
+        // Header (name NOT indented)
+        System.out.printf("[%s]%n", this.UserName.toUpperCase());
+
+        //System heading and table header
+        System.out.printf(IND + "%s%n", "desktop");
+        System.out.println(DIVIDER);
+        System.out.printf(HEADING_FMT_STR, "Component", "Price");
+    
+        // -------------------- DESKTOP --------------------
+        if (choice.equalsIgnoreCase("desktop")){
+            
+            //brand of desktop and price
+            System.out.printf(DATA_FMT_STR, String.format("Brand(%s)", brand), this.brandPrice());
+            
+            //tower size and price
+            System.out.printf(DATA_FMT_STR, String.format("Tower(%s)", tower), this.towerPrice());
+            
+            //brand of cpu and price
+            System.out.printf(DATA_FMT_STR, String.format("CPU(%s)", cpu), this.cpuPrice());
+            
+            //cpu speed and price
+            System.out.printf(DATA_FMT_STR, String.format("CPU Speed (%.1f GHz)", cpuSpeed), this.cpuSpeedPrice());
+            
+            //hard drive capacity and price
+            System.out.printf(DATA_FMT_STR, String.format("Hard Drive (%.0f GB)", hardDriveCap), this.hardDriveCapPrice());
+            
+            //brand of monitor and price
+            System.out.printf(DATA_FMT_STR, String.format("Monitor Brand(%s)", monitorBrand), this.monitorBrandPrice());
+
+            //monitor size and price
+            System.out.printf(DATA_FMT_STR, String.format("Monitor Size (%.0f inch)", monitorSize), this.monitorSizePrice());
+        
+            // Footer
+            System.out.println(DIVIDER);
+            System.out.printf(IND + "%-25s$%7.2f%n", "Total:", this.totalPrice());
+        }
+        else if (choice.equalsIgnoreCase("laptop")){
+            
+            //brand of laptop and price
+            System.out.printf(DATA_FMT_STR, String.format("Brand(%s)", brand), this.brandPrice());
+            
+            //brand of cpu and price
+            System.out.printf(DATA_FMT_STR, String.format("CPU(%s)", cpu), this.cpuPrice());
+            
+            //cpu speed and price
+            System.out.printf(DATA_FMT_STR, String.format("CPU Speed (%.1f GHz)", cpuSpeed), this.cpuSpeedPrice());
+
+            //hard drive capacity and price
+            System.out.printf(DATA_FMT_STR, String.format("Hard Drive (%.0f GB)", hardDriveCap), this.hardDriveCapPrice());
+
+            //display size and price
+            System.out.printf(DATA_FMT_STR, String.format("Display (%.1f inch)", displaySize), this.displaySizePrice());
+    
+            // Footer
+            System.out.println(DIVIDER);
+            System.out.printf(IND + "%-25s$%7.2f%n", "Total:", this.totalPrice());
+        }
+    }
+}
+    
