@@ -55,7 +55,7 @@ public class ComputerDriver {
                 System.out.printf("Select the monitor size\nenter a number in inches:\n");
                 monitorSize = stdIn.nextLine();
                 
-                ComputerBuilder desktop = new ComputerBuilder(name, brand, tower, cpu, cpuSpeed, hardDriveCap, monitorBrand, monitorSize); //overloaded constructor
+                DesktopBuilder desktop = new DesktopBuilder(name, brand, tower, cpu, cpuSpeed, hardDriveCap, monitorBrand, monitorSize); //overloaded constructor
                 desktop.printReceipt(choice);
                 
             }
@@ -75,14 +75,12 @@ public class ComputerDriver {
                 System.out.printf("Select the display size (in inches):\n");
                 displaySize = stdIn.nextLine();
                 
-                ComputerBuilder desktop = new ComputerBuilder(name, brand, cpu, cpuSpeed, hardDriveCap, displaySize); //overloaded constructor
-                desktop.printReceipt(choice);
+                LaptopBuilder laptop = new LaptopBuilder(name, brand, cpu, cpuSpeed, hardDriveCap, displaySize); //overloaded constructor
+                laptop.printReceipt(choice);
             }
             else{
                 System.out.printf("That is not one of the listed options.\n");
             }
-            
-        
             
                 
             System.out.printf("Press q to quit or any other key to continue.\n");
