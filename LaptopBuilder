@@ -1,0 +1,187 @@
+
+/**
+ * Write a description of class LaptopBuilder here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class LaptopBuilder{
+    
+    private String UserName; //the user's name
+    private String brand; //the brand that the user has chosen
+    private String cpu; //the cpu brand that the user has chosen
+    private double cpuSpeed; //the cpu speed that the user has chosen
+    private double hardDriveCap; //the hard drive capacity that the user has chosen
+    private double displaySize;
+    private double total = 0.0;
+    
+    //laptop price variables
+    private final double zero = 0.0;
+    private final double fifty = 50.0;
+    private final double seventy = 70.0;
+    private final double oneHundred = 100.0;
+    private final double oneHundredFifty = 150.0;
+    private final double twoHundred = 200.0;
+    private final double twoHundredFifty = 250.0;
+    private final double threeHundred = 300.0;
+
+    
+    public LaptopBuilder(String name, String brand, String cpu, String cpuSpeed, String hardDriveCap, String displaySize){
+        this.UserName = name;
+        this.brand = brand;
+        this.cpu = cpu;
+        this.cpuSpeed = Double.parseDouble(cpuSpeed);
+        this.hardDriveCap = Double.parseDouble(hardDriveCap);
+        this.displaySize = Double.parseDouble(displaySize);
+    }
+    
+    private double brandPrice(){
+        if (this.brand.equalsIgnoreCase("Dell")){
+            this.total += threeHundred;
+            return 300;
+        }
+        else if (this.brand.equalsIgnoreCase("HP")){
+            this.total += twoHundredFifty;
+            return 250;
+        }
+        else if (this.brand.equalsIgnoreCase("Lenovo")){
+            this.total += twoHundredFifty;
+            return 250;
+        }
+        else{
+            this.total += twoHundred; // default brand base
+            return 200;
+        }
+    }
+    
+    private double cpuPrice(String cpu){
+        if (this.cpu.equalsIgnoreCase("AMD")){
+            this.total += oneHundredFifty;
+            return 150;
+        }
+        else if (this.cpu.equalsIgnoreCase("Intel")){
+            this.total += twoHundred;
+            return 200;
+        }
+        else{
+            this.total += oneHundred;// unknown/other
+            return 100;
+        } 
+        
+    }
+    
+    private double cpuPrice(double cpuSpeed){
+        if (this.cpuSpeed <= 2.0) {
+            this.total += fifty;    // very low power CPU speed
+            return 50;
+        }   
+        else if (this.cpuSpeed <= 2.5) {
+            this.total += seventy;    // entry tier
+            return 70;
+        } 
+        else if (this.cpuSpeed <= 3.0) {
+            this.total += oneHundredFifty;   // mainstream
+            return 150;
+        } 
+        else if (this.cpuSpeed <= 3.5) {
+            this.total += twoHundred;   // mid-performance
+            return 200;
+        } 
+        else if (this.cpuSpeed <= 4.0) {
+            this.total += twoHundredFifty;   // high-performance
+            return 250;
+        } 
+        else {
+            this.total += threeHundred;   // elite
+            return 300;
+        }
+    }
+    
+    private double hardDriveCapPrice(){
+        if (this.hardDriveCap <= 500) {
+            this.total += fifty;   
+            return 50;
+        } 
+        else if (this.hardDriveCap <= 1000) {
+            this.total += oneHundred;
+            return 100;
+        } 
+        else if (this.hardDriveCap <= 2000) {
+            this.total += oneHundredFifty;  
+            return 150;
+        } 
+        else {
+            this.total += twoHundred;
+            return 200;
+        }
+    }
+    
+    private double displaySizePrice(){
+        if (this.displaySize <= 13) {
+            this.total += seventy;   
+            return 70;
+        } 
+        else if (this.displaySize <= 15) {
+            this.total += oneHundred;   
+            return 120;
+        } 
+        else if (this.displaySize <= 17) {
+            this.total += oneHundredFifty;   
+            return 150;
+        }
+        else if (this.displaySize > 17) {
+            this.total += twoHundred;   
+            return 200;
+        }  
+        else {
+            this.total += zero;
+            return 0;
+        }
+        
+    }
+    
+    private double totalPrice(){
+        return this.total;
+    }
+    
+    public void printReceipt(String choice){
+        // Reset total for fresh calculation
+        this.total = 0.0;
+    
+        // Indented format strings
+        final String IND = "    ";
+        final String HEADING_FMT_STR = IND + "%-25s%15s%n";
+        final String DATA_FMT_STR    = IND + "%-25s%15.2f%n";
+        final String DIVIDER = IND + "------------------------------------------------------------";
+    
+        // Header (name NOT indented)
+        System.out.printf("[%s]%n", this.UserName.toUpperCase());
+
+        //System heading and table header
+    
+        // -------------------- LAPTOP --------------------
+            
+        System.out.printf(IND + "%s%n", choice.toLowerCase());
+        System.out.println(DIVIDER);
+        System.out.printf(HEADING_FMT_STR, "Component", "Price");
+            
+        //brand of laptop and price
+        System.out.printf(DATA_FMT_STR, String.format("Brand(%s)", this.brand), this.brandPrice());
+            
+        //brand of cpu and price
+        System.out.printf(DATA_FMT_STR, String.format("CPU(%s)", cpu), this.cpuPrice(this.cpu));
+            
+        //cpu speed and price
+        System.out.printf(DATA_FMT_STR, String.format("CPU Speed (%.1f GHz)", this.cpuSpeed), this.cpuPrice(this.cpuSpeed));
+
+        //hard drive capacity and price
+        System.out.printf(DATA_FMT_STR, String.format("Hard Drive (%.0f GB)", this.hardDriveCap), this.hardDriveCapPrice());
+
+        //display size and price
+        System.out.printf(DATA_FMT_STR, String.format("Display (%.1f inch)", this.displaySize), this.displaySizePrice());
+    
+        // Footer
+        System.out.println(DIVIDER);
+        System.out.printf(IND + "%-25s$%7.2f%n", "Total:", this.totalPrice());
+    }
+}
