@@ -1,0 +1,93 @@
+// Computer.java
+// Sam B. Dean
+// Models a simple computer with processor, RAM, and disk attributes.
+
+import java.util.Scanner;
+
+
+public class ComputerDriver {
+    public static void main(String[] args) {
+        
+        Scanner stdIn = new Scanner(System.in);
+            
+        String quit = "";
+            
+        while (!quit.equalsIgnoreCase("q")){
+            
+            //variables section
+            String choice; //is the user creating a desktop or laptop
+            String name; //the user's name
+            String brand; //the brand that the user has chosen
+            String tower; //the tower type that the user has chosen
+            String cpu; //the cpu brand that the user has chosen
+            String cpuSpeed; //the cpu speed that the user has chosen
+            String hardDriveCap; //the hard drive capacity that the user has chosen
+            String monitorBrand; //the monitor brand that the user has chosen
+            String monitorSize; //the monitor size that the user has chosen
+            String displaySize; //the laptop display size that the user has chosen
+            
+            
+            System.out.printf("Would you like to create a desktop or laptop?\n");
+            choice = stdIn.nextLine();
+            
+            System.out.printf("What is your name?\n");
+            name = stdIn.nextLine();
+            
+            if (choice.equalsIgnoreCase("desktop")){
+                System.out.printf("Please select the desktop brand from the list below:\n(Dell, HP, Lenovo)\n");
+                brand = stdIn.nextLine();
+                
+                System.out.printf("Select the tower type from the list below:\n(\"Full tower\", \"Mini tower\")\n");
+                tower = stdIn.nextLine();
+                
+                System.out.printf("Select the cpu brand from the list below:\n(AMD, Intel)\n");
+                cpu = stdIn.nextLine();
+                
+                System.out.printf("Select the cpu speed\nenter a number in GHz(example: 2.5):\n");
+                cpuSpeed = stdIn.nextLine();
+                
+                System.out.printf("Select the hard drive capacity\nenter a number in GB(example: 1000):\n");
+                hardDriveCap = stdIn.nextLine();
+                
+                System.out.printf("Select a monitor brand from the list below:\n(Samsung, LG)\n");
+                monitorBrand = stdIn.nextLine();
+                
+                System.out.printf("Select the monitor size\nenter a number in inches:\n");
+                monitorSize = stdIn.nextLine();
+                
+                ComputerBuilder desktop = new ComputerBuilder(name, brand, tower, cpu, cpuSpeed, hardDriveCap, monitorBrand, monitorSize); //overloaded constructor
+                desktop.printReceipt(choice);
+                
+            }
+            else if (choice.equalsIgnoreCase("laptop")){
+                System.out.printf("Please select the laptop brand:\n(Dell, HP, Lenovo)\n");
+                brand = stdIn.nextLine();
+                
+                System.out.printf("Select the cpu brand (AMD, Intel):\n");
+                cpu = stdIn.nextLine();
+                
+                System.out.printf("Select the cpu speed\nenter a number in GHz(example: 2.5):\n");
+                cpuSpeed = stdIn.nextLine();
+                
+                System.out.printf("Select the hard drive capacity (in GB):\n");
+                hardDriveCap = stdIn.nextLine();
+                
+                System.out.printf("Select the display size (in inches):\n");
+                displaySize = stdIn.nextLine();
+                
+                ComputerBuilder desktop = new ComputerBuilder(name, brand, cpu, cpuSpeed, hardDriveCap, displaySize); //overloaded constructor
+                desktop.printReceipt(choice);
+            }
+            else{
+                System.out.printf("That is not one of the listed options.\n");
+            }
+            
+        
+            
+                
+            System.out.printf("Press q to quit or any other key to continue.\n");
+            quit = stdIn.nextLine();
+            }
+        stdIn.close();
+    } // end main
+} // end class ComputerDriver
