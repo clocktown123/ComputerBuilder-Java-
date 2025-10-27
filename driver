@@ -27,63 +27,67 @@ public class ComputerDriver {
             String displaySize; //the laptop display size that the user has chosen
             
             
-            System.out.printf("Would you like to create a desktop or laptop?\n");
+            System.out.printf("Would you like to create a desktop or laptop?%n");
             choice = stdIn.nextLine();
             
-            System.out.printf("What is your name?\n");
+            System.out.printf("What is your name?%n");
             name = stdIn.nextLine();
             
             if (choice.equalsIgnoreCase("desktop")){
-                System.out.printf("Please select the desktop brand from the list below:\n(Dell, HP, Lenovo)\n");
+                System.out.printf("Please select the desktop brand from the list below:%n(Dell, HP, Lenovo)%n");
                 brand = stdIn.nextLine();
                 
-                System.out.printf("Select the tower type from the list below:\n(\"Full tower\", \"Mini tower\")\n");
+                System.out.printf("Select the tower type from the list below:%n(\"Full tower\", \"Mini tower\")%n");
                 tower = stdIn.nextLine();
                 
-                System.out.printf("Select the cpu brand from the list below:\n(AMD, Intel)\n");
+                System.out.printf("Select the cpu brand from the list below:%n(AMD, Intel)%n");
                 cpu = stdIn.nextLine();
                 
-                System.out.printf("Select the cpu speed\nenter a number in GHz(example: 2.5):\n");
+                System.out.printf("Select the cpu speed%nenter a number in GHz(example: 2.5):%n");
                 cpuSpeed = stdIn.nextLine();
                 
-                System.out.printf("Select the hard drive capacity\nenter a number in GB(example: 1000):\n");
+                System.out.printf("Select the hard drive capacity%nenter a number in GB(example: 1000):%n");
                 hardDriveCap = stdIn.nextLine();
                 
-                System.out.printf("Select a monitor brand from the list below:\n(Samsung, LG)\n");
+                System.out.printf("Select a monitor brand from the list below:%n(Samsung, LG)%n");
                 monitorBrand = stdIn.nextLine();
                 
-                System.out.printf("Select the monitor size\nenter a number in inches:\n");
+                System.out.printf("Select the monitor size%nenter a number in inches:%n");
                 monitorSize = stdIn.nextLine();
                 
-                DesktopBuilder desktop = new DesktopBuilder(name, brand, tower, cpu, cpuSpeed, hardDriveCap, monitorBrand, monitorSize); //overloaded constructor
+                DesktopBuilder desktop = new DesktopBuilder(name, brand, tower); //overloaded constructor
+                DesktopBuilder desktop1 = new DesktopBuilder(cpu, cpuSpeed, hardDriveCap, monitorBrand, monitorSize);
                 desktop.printReceipt(choice);
-                
+                desktop1.printReceipt(desktop);
             }
             else if (choice.equalsIgnoreCase("laptop")){
-                System.out.printf("Please select the laptop brand:\n(Dell, HP, Lenovo)\n");
+                System.out.printf("Please select the laptop brand:%n(Dell, HP, Lenovo)%n");
                 brand = stdIn.nextLine();
                 
-                System.out.printf("Select the cpu brand (AMD, Intel):\n");
+                System.out.printf("Select the cpu brand (AMD, Intel):%n");
                 cpu = stdIn.nextLine();
                 
-                System.out.printf("Select the cpu speed\nenter a number in GHz(example: 2.5):\n");
+                System.out.printf("Select the cpu speed%nenter a number in GHz(example: 2.5):%n");
                 cpuSpeed = stdIn.nextLine();
                 
-                System.out.printf("Select the hard drive capacity (in GB):\n");
+                System.out.printf("Select the hard drive capacity (in GB):%n");
                 hardDriveCap = stdIn.nextLine();
                 
-                System.out.printf("Select the display size (in inches):\n");
+                System.out.printf("Select the display size (in inches):%n");
                 displaySize = stdIn.nextLine();
                 
-                LaptopBuilder laptop = new LaptopBuilder(name, brand, cpu, cpuSpeed, hardDriveCap, displaySize); //overloaded constructor
+                LaptopBuilder laptop = new LaptopBuilder(name, brand); //overloaded constructor
+                LaptopBuilder laptop1 = new LaptopBuilder(cpu, cpuSpeed, hardDriveCap, displaySize);
                 laptop.printReceipt(choice);
+                laptop1.printReceipt(laptop);
+
             }
             else{
-                System.out.printf("That is not one of the listed options.\n");
+                System.out.printf("That is not one of the listed options.%n");
             }
             
                 
-            System.out.printf("Press q to quit or any other key to continue.\n");
+            System.out.printf("Press q to quit or any other key to continue.%n");
             quit = stdIn.nextLine();
             }
         stdIn.close();
