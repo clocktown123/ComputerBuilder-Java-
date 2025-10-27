@@ -28,10 +28,13 @@ public class DesktopBuilder{
     private final double twoHundredFifty = 250.0;
     private final double threeHundred = 300.0;
     
-    public DesktopBuilder(String name, String brand, String tower, String cpu, String cpuSpeed, String hardDriveCap, String monitorBrand, String monitorSize){
+    public DesktopBuilder(String name, String brand, String tower){
         this.UserName = name;
         this.brand = brand;
         this.tower = tower;
+    }
+
+    public DesktopBuilder(String cpu, String cpuSpeed, String hardDriveCap, String monitorBrand, String monitorSize){
         this.cpu = cpu;
         this.cpuSpeed = Double.parseDouble(cpuSpeed);
         this.hardDriveCap = Double.parseDouble(hardDriveCap);
@@ -73,12 +76,12 @@ public class DesktopBuilder{
         }
     }
     
-    private double cpuPrice(String cpu){
-        if (this.cpu.equalsIgnoreCase("AMD")){
+    private double cpuPrice(String cpu){ //Overloaded constructor
+        if (cpu.equalsIgnoreCase("AMD")){
             this.total += oneHundredFifty;
             return 150;
         }
-        else if (this.cpu.equalsIgnoreCase("Intel")){
+        else if (cpu.equalsIgnoreCase("Intel")){
             this.total += twoHundred;
             return 200;
         }
@@ -89,24 +92,24 @@ public class DesktopBuilder{
         
     }
     
-    private double cpuPrice(double cpuSpeed){
-        if (this.cpuSpeed <= 2.0) {
+    private double cpuPrice(double cpuSpeed){ //Overloaded constructor
+        if (cpuSpeed <= 2.0) {
             this.total += fifty;    // very low power CPU speed
             return 50;
         }   
-        else if (this.cpuSpeed <= 2.5) {
+        else if (cpuSpeed <= 2.5) {
             this.total += seventy;    // entry tier
             return 70;
         } 
-        else if (this.cpuSpeed <= 3.0) {
+        else if (cpuSpeed <= 3.0) {
             this.total += oneHundredFifty;   // mainstream
             return 150;
         } 
-        else if (this.cpuSpeed <= 3.5) {
+        else if (cpuSpeed <= 3.5) {
             this.total += twoHundred;   // mid-performance
             return 200;
         } 
-        else if (this.cpuSpeed <= 4.0) {
+        else if (cpuSpeed <= 4.0) {
             this.total += twoHundredFifty;   // high-performance
             return 250;
         } 
@@ -173,13 +176,13 @@ public class DesktopBuilder{
         }
     }
     
-    private double totalPrice(){
-        return this.total;
+    private double totalPrice(DesktopBuilder desktop){
+        return this.total + desktop.total;
     }
     
     public void printReceipt(String choice){
         // Reset total for fresh calculation
-        this.total = 0.0;
+
     
         // Indented format strings
         final String IND = "    ";
@@ -203,25 +206,41 @@ public class DesktopBuilder{
             
         //tower size and price
         System.out.printf(DATA_FMT_STR, String.format("Tower(%s)", this.tower), this.towerPrice());
-            
-        //brand of cpu and price
+
+    }
+
+    public void printReceipt(DesktopBuilder desktop){
+        // Reset total for fresh calculation
+
+
+        // Indented format strings
+        final String IND = "    ";
+        final String DATA_FMT_STR    = IND + "%-25s%15.2f%n";
+        final String DIVIDER = IND + "------------------------------------------------------------";
+
+        //System heading and table header
+
+        // -------------------- DESKTOP --------------------
+
+
+        //brand of cpu and price using overloaded constructor
         System.out.printf(DATA_FMT_STR, String.format("CPU(%s)", this.cpu), this.cpuPrice(this.cpu));
-            
-        //cpu speed and price
+
+        //cpu speed and price using overloaded constructor
         System.out.printf(DATA_FMT_STR, String.format("CPU Speed (%.1f GHz)", this.cpuSpeed), this.cpuPrice(this.cpuSpeed));
-            
+
         //hard drive capacity and price
         System.out.printf(DATA_FMT_STR, String.format("Hard Drive (%.0f GB)", this.hardDriveCap), this.hardDriveCapPrice());
-            
+
         //brand of monitor and price
         System.out.printf(DATA_FMT_STR, String.format("Monitor Brand(%s)", this.monitorBrand), this.monitorBrandPrice());
 
         //monitor size and price
         System.out.printf(DATA_FMT_STR, String.format("Monitor Size (%.0f inch)", this.monitorSize), this.monitorSizePrice());
-        
+
         // Footer
         System.out.println(DIVIDER);
-        System.out.printf(IND + "%-25s$%7.2f%n", "Total:", this.totalPrice());
+        System.out.printf(IND + "%-25s$%7.2f%n", "Total:", this.totalPrice(desktop));
     }
     
 }
