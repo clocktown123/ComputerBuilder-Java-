@@ -45,49 +45,49 @@ public class DesktopBuilder{
     private double brandPrice(){
         if (this.brand.equalsIgnoreCase("Dell")){
             this.total += threeHundred;
-            return 300;
+            return threeHundred;
         }
         else if (this.brand.equalsIgnoreCase("HP")){
             this.total += twoHundredFifty;
-            return 250;
+            return twoHundredFifty;
         }
         else if (this.brand.equalsIgnoreCase("Lenovo")){
             this.total += twoHundredFifty;
-            return 250;
+            return twoHundredFifty;
         }
         else{
-            this.total += twoHundred; // default brand base
-            return 200;
+            System.out.printf("That is not a listed option, please chose again.%n");//this.total += twoHundred; // default brand base
+            return zero;
         }
     }
     
     private double towerPrice(){
         if (this.tower.equalsIgnoreCase("Full tower")){
             this.total += oneHundred;
-            return 100;
+            return oneHundred;
         }
         else if (this.tower.equalsIgnoreCase("Mini tower")){
             this.total += seventy;
-            return 70;
+            return seventy;
         }
         else{
-            this.total += zero;
-            return 0;
+            System.out.printf("That is not a listed option, please chose again.%n");
+            return zero;
         }
     }
     
     private double cpuPrice(String cpu){ //Overloaded constructor
         if (cpu.equalsIgnoreCase("AMD")){
             this.total += oneHundredFifty;
-            return 150;
+            return oneHundredFifty;
         }
         else if (cpu.equalsIgnoreCase("Intel")){
             this.total += twoHundred;
-            return 200;
+            return twoHundred;
         }
         else{
-            this.total += oneHundred;// unknown/other
-            return 100;
+            System.out.printf("That is not a listed option, please chose again.%n");
+            return zero;
         } 
         
     }
@@ -95,84 +95,84 @@ public class DesktopBuilder{
     private double cpuPrice(double cpuSpeed){ //Overloaded constructor
         if (cpuSpeed <= 2.0) {
             this.total += fifty;    // very low power CPU speed
-            return 50;
+            return fifty;
         }   
         else if (cpuSpeed <= 2.5) {
             this.total += seventy;    // entry tier
-            return 70;
+            return seventy;
         } 
         else if (cpuSpeed <= 3.0) {
             this.total += oneHundredFifty;   // mainstream
-            return 150;
+            return oneHundredFifty;
         } 
         else if (cpuSpeed <= 3.5) {
             this.total += twoHundred;   // mid-performance
-            return 200;
+            return twoHundred;
         } 
         else if (cpuSpeed <= 4.0) {
             this.total += twoHundredFifty;   // high-performance
-            return 250;
+            return twoHundredFifty;
         } 
         else {
             this.total += threeHundred;   // elite
-            return 300;
+            return threeHundred;
         }
     }
     
     private double hardDriveCapPrice(){
         if (this.hardDriveCap <= 500) {
             this.total += fifty;   
-            return 50;
+            return fifty;
         } 
         else if (this.hardDriveCap <= 1000) {
             this.total += oneHundred;
-            return 100;
+            return oneHundred;
         } 
         else if (this.hardDriveCap <= 2000) {
             this.total += oneHundredFifty;  
-            return 150;
+            return oneHundredFifty;
         } 
         else {
             this.total += twoHundred;
-            return 200;
+            return twoHundred;
         }
     }
     
     private double monitorBrandPrice(){
         if (this.monitorBrand.equalsIgnoreCase("Samsung")) {
             this.total += oneHundredFifty;   
-            return 150;
+            return oneHundredFifty;
         } 
         else if (this.monitorBrand.equalsIgnoreCase("LG")) {
             this.total += oneHundred;   
-            return 100;
+            return oneHundred;
         }  
         else {
-            this.total += zero;
-            return 0;
+            System.out.printf("That is not a listed option, please chose again.%n");
+            return zero;
         }
     }
     
     private double monitorSizePrice(){
         if (this.monitorSize <= 24) {
             this.total += oneHundred;   
-            return 100;
+            return oneHundred;
         } 
         else if (this.monitorSize <= 27) {
             this.total += oneHundredFifty;   
-            return 150;
+            return oneHundredFifty;
         } 
         else if (this.monitorSize <= 32) {
             this.total += twoHundred;   
-            return 200;
+            return twoHundred;
         }
         else if (this.monitorSize > 32) {
             this.total += twoHundredFifty;   
-            return 250;
+            return twoHundredFifty;
         }  
         else {
-            this.total += zero;
-            return 0;
+            System.out.printf("That is not a listed option, please chose again.%n");
+            return zero;
         }
     }
     
